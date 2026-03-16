@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medtronic Device Registration Form</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+–blue: #005EB8;
+–blue-dark: #003F7F;
+–blue-light: #E8F0FB;
+–blue-mid: #C5D8F5;
+–red: #C8102E;
+–gray-50: #F8FAFC;
+–gray-100: #F1F5F9;
+–gray-200: #E2E8F0;
+–gray-300: #CBD5E1;
+–gray-500: #64748B;
+–gray-700: #334155;
+–gray-900: #0F172A;
+–green: #16A34A;
+–amber: #D97706;
+–radius: 6px;
+–shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+–shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘IBM Plex Sans Thai’, sans-serif;
+background: var(–gray-100);
+color: var(–gray-900);
+font-size: 13px;
+line-height: 1.5;
+min-height: 100vh;
+}
+
+/* TOP BAR */
+.topbar {
+background: var(–blue-dark);
+color: white;
+padding: 0 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+height: 52px;
+position: sticky;
+top: 0;
+z-index: 100;
+box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.topbar-left { display: flex; align-items: center; gap: 16px; }
+.logo-text {
+font-size: 18px;
+font-weight: 600;
+letter-spacing: -0.5px;
+color: white;
+}
+.form-badge {
+background: rgba(255,255,255,0.15);
+border: 1px solid rgba(255,255,255,0.2);
+border-radius: 4px;
+padding: 2px 10px;
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+color: rgba(255,255,255,0.85);
+}
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+
+.autosave-badge {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 11px;
+color: rgba(255,255,255,0.6);
+transition: color 0.3s;
+}
+.autosave-badge.saved { color: #86EFAC; }
+.autosave-dot {
+width: 6px; height: 6px;
+border-radius: 50%;
+background: currentColor;
+flex-shrink: 0;
+}
+
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 7px 16px;
+border-radius: var(–radius);
+font-family: inherit;
+font-size: 12px;
+font-weight: 500;
+cursor: pointer;
+border: none;
+transition: all 0.15s;
+white-space: nowrap;
+letter-spacing: 0.2px;
+}
+.btn-ghost {
+background: rgba(255,255,255,0.1);
+color: white;
+border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.2); }
+.btn-danger {
+background: rgba(200,16,46,0.2);
+color: #FCA5A5;
+border: 1px solid rgba(200,16,46,0.3);
+}
+.btn-danger:hover { background: rgba(200,16,46,0.35); }
+.btn-primary {
+background: white;
+color: var(–blue-dark);
+box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.btn-primary:hover { background: var(–blue-light); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.2); }
+
+/* LAYOUT */
+.container {
+max-width: 900px;
+margin: 0 auto;
+padding: 24px 16px 80px;
+}
+
+/* FORM NUMBER */
+.form-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 20px;
+}
+.form-title {
+font-size: 22px;
+font-weight: 600;
+color: var(–blue-dark);
+letter-spacing: -0.5px;
+}
+.form-number {
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 20px;
+font-weight: 500;
+color: var(–red);
+background: #FEF2F2;
+border: 1px solid #FECACA;
+border-radius: var(–radius);
+padding: 4px 14px;
+}
+
+/* STAFF NAME */
+.staff-row {
+background: white;
+border: 1px solid var(–gray-200);
+border-radius: var(–radius);
+padding: 12px 16px;
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 12px;
+box-shadow: var(–shadow);
+}
+.staff-row label { font-weight: 600; color: var(–gray-700); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.staff-row input { flex: 1; border: none; border-bottom: 2px solid var(–blue-mid); outline: none; padding: 4px 0; font-family: inherit; font-size: 14px; background: transparent; }
+.staff-row input:focus { border-bottom-color: var(–blue); }
+
+/* CARD */
+.card {
+background: white;
+border: 1px solid var(–gray-200);
+border-radius: var(–radius);
+margin-bottom: 16px;
+box-shadow: var(–shadow);
+overflow: hidden;
+}
+.card-header {
+background: var(–blue);
+color: white;
+padding: 10px 16px;
+font-size: 11px;
+font-weight: 600;
+letter-spacing: 1px;
+text-transform: uppercase;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.card-header .section-num {
+background: rgba(255,255,255,0.2);
+border-radius: 3px;
+padding: 1px 7px;
+font-size: 10px;
+}
+.card-body { padding: 16px; }
+
+/* GRID FIELDS */
+.field-grid { display: grid; gap: 12px; }
+.col-2 { grid-template-columns: 1fr 1fr; }
+.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+.col-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.col-1-2 { grid-template-columns: 1fr 2fr; }
+.col-2-1 { grid-template-columns: 2fr 1fr; }
+
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label {
+font-size: 10px;
+font-weight: 600;
+color: var(–gray-500);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+.field label .req { color: var(–red); margin-left: 2px; }
+.field input, .field select, .field textarea {
+border: 1px solid var(–gray-200);
+border-radius: 4px;
+padding: 7px 10px;
+font-family: inherit;
+font-size: 13px;
+color: var(–gray-900);
+background: var(–gray-50);
+transition: all 0.15s;
+outline: none;
+width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+border-color: var(–blue);
+background: white;
+box-shadow: 0 0 0 3px rgba(0,94,184,0.1);
+}
+.field input.invalid, .field select.invalid, .field textarea.invalid {
+border-color: var(–red);
+background: #FFF5F5;
+}
+.field textarea { resize: vertical; min-height: 60px; }
+.field select { cursor: pointer; }
+
+/* DATE INPUT */
+.date-group { display: flex; gap: 6px; align-items: center; }
+.date-group input {
+text-align: center;
+font-family: ‘IBM Plex Mono’, monospace;
+font-size: 13px;
+}
+.date-group span { color: var(–gray-300); font-weight: 300; }
+
+/* DIVIDER */
+.divider { border: none; border-top: 1px solid var(–gray-200); margin: 12px 0; }
+
+/* CHECKBOXES */
+.check-group { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.check-item { display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.check-item input[type=“checkbox”] {
+width: 15px; height: 15px;
+accent-color: var(–blue);
+cursor: pointer;
+}
+.check-item span { font-size: 12px; color: var(–gray-700); font-weight: 500; }
+.check-item input[type=“radio”] {
+width: 15px; height: 15px;
+accent-color: var(–blue);
+cursor: pointer;
+}
+
+/* SECTION II sub */
+.subsection-label {
+font-size: 10px;
+font-weight: 700;
+color: var(–gray-500);
+text-transform: uppercase;
+letter-spacing: 0.8px;
+margin-bottom: 8px;
+margin-top: 4px;
+}
+
+/* DEVICE TABLE */
+.device-table { width: 100%; border-collapse: collapse; }
+.device-table th {
+background: var(–blue-light);
+border: 1px solid var(–blue-mid);
+padding: 6px 8px;
+font-size: 10px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+color: var(–blue-dark);
+text-align: left;
+white-space: nowrap;
+}
+.device-table td {
+border: 1px solid var(–gray-200);
+padding: 4px 6px;
+vertical-align: middle;
+}
+.device-table td:first-child {
+background: var(–gray-50);
+font-weight: 600;
+font-size: 11px;
+color: var(–gray-700);
+white-space: nowrap;
+width: 90px;
+}
+.device-table input {
+border: none;
+background: transparent;
+font-family: inherit;
+font-size: 12px;
+width: 100%;
+outline: none;
+padding: 3px 4px;
+border-radius: 3px;
+}
+.device-table input:focus { background: var(–blue-light); }
+.device-table .date-mini { display: flex; gap: 3px; align-items: center; }
+.device-table .date-mini input { width: 26px; text-align: center; font-family: ‘IBM Plex Mono’, monospace; font-size: 11px; }
+.device-table .date-mini span { color: var(–gray-300); font-size: 10px; }
+
+/* TOTAL THB */
+.total-box {
+background: var(–blue-dark);
+color: white;
+padding: 10px 14px;
+border-radius: var(–radius);
+display: flex;
+align-items: center;
+gap: 10px;
+margin-top: 12px;
+}
+.total-box label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.total-box input {
+background: transparent;
+border: none;
+border-bottom: 1px solid rgba(255,255,255,0.4);
+color: white;
+font-size: 16px;
+font-family: ‘IBM Plex Mono’, monospace;
+font-weight: 500;
+outline: none;
+flex: 1;
+padding: 2px 4px;
+}
+.total-box input::placeholder { color: rgba(255,255,255,0.3); }
+
+/* LEAD MEASUREMENT */
+.lead-table { width: 100%; border-collapse: collapse; }
+.lead-table th {
+background: var(–blue-light);
+border: 1px solid var(–blue-mid);
+padding: 7px 8px;
+font-size: 10px;
+font-weight: 700;
+text-transform: uppercase;
+color: var(–blue-dark);
+text-align: center;
+letter-spacing: 0.4px;
+}
+.lead-table td {
+border: 1px solid var(–gray-200);
+padding: 5px 6px;
+vertical-align: middle;
+text-align: center;
+}
+.lead-table td:first-child { text-align: left; font-weight: 600; font-size: 11px; background: var(–gray-50); }
+.lead-table input {
+border: none; background: transparent;
+font-family: inherit; font-size: 12px;
+width: 100%; text-align: center;
+outline: none; padding: 3px;
+border-radius: 3px;
+}
+.lead-table input:focus { background: var(–blue-light); }
+
+/* INDICATION */
+.indication-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.ind-box {
+border: 1px solid var(–gray-200);
+border-radius: var(–radius);
+overflow: hidden;
+}
+.ind-box-header {
+background: var(–gray-100);
+border-bottom: 1px solid var(–gray-200);
+padding: 7px 10px;
+font-size: 10px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.6px;
+color: var(–gray-700);
+}
+.ind-box-body { padding: 10px; display: flex; flex-direction: column; gap: 7px; }
+
+/* PARAMETERS */
+.param-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.param-row label { font-size: 11px; font-weight: 600; color: var(–gray-700); white-space: nowrap; }
+
+/* DETECTION */
+.detect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.detect-row { display: flex; align-items: center; gap: 8px; }
+.detect-row label { font-size: 11px; font-weight: 600; white-space: nowrap; min-width: 90px; color: var(–gray-700); }
+.detect-row input { width: 60px; border: 1px solid var(–gray-200); border-radius: 3px; padding: 4px 6px; font-family: inherit; font-size: 12px; text-align: center; }
+.detect-row input:focus { border-color: var(–blue); outline: none; }
+.detect-row span { font-size: 11px; color: var(–gray-500); }
+
+/* PATIENT DATA SIDE */
+.two-col-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ACCESSORIES */
+.accessories-box {
+border: 1px solid var(–gray-200);
+border-radius: var(–radius);
+padding: 10px;
+min-height: 80px;
+}
+.accessories-box textarea {
+width: 100%;
+border: none;
+resize: none;
+font-family: inherit;
+font-size: 13px;
+min-height: 80px;
+background: transparent;
+outline: none;
+color: var(–gray-900);
+}
+
+/* VALIDATION */
+.error-msg {
+background: #FEF2F2;
+border: 1px solid #FECACA;
+border-radius: var(–radius);
+padding: 12px 16px;
+margin-bottom: 16px;
+display: none;
+}
+.error-msg.visible { display: block; }
+.error-msg-title { font-weight: 600; color: var(–red); font-size: 13px; margin-bottom: 6px; }
+.error-list { list-style: none; }
+.error-list li { font-size: 12px; color: #B91C1C; padding: 2px 0; }
+.error-list li::before { content: “• “; }
+
+/* BOTTOM ACTION BAR */
+.action-bar {
+position: fixed;
+bottom: 0; left: 0; right: 0;
+background: white;
+border-top: 1px solid var(–gray-200);
+padding: 12px 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+z-index: 100;
+}
+.action-bar-left { display: flex; align-items: center; gap: 10px; }
+.action-bar-right { display: flex; align-items: center; gap: 10px; }
+
+.btn-lg {
+padding: 9px 22px;
+font-size: 13px;
+border-radius: var(–radius);
+font-family: inherit;
+font-weight: 600;
+cursor: pointer;
+border: none;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+transition: all 0.15s;
+}
+.btn-lg-outline {
+background: white;
+border: 1.5px solid var(–gray-300);
+color: var(–gray-700);
+}
+.btn-lg-outline:hover { border-color: var(–blue); color: var(–blue); }
+.btn-lg-blue {
+background: var(–blue);
+color: white;
+box-shadow: 0 2px 6px rgba(0,94,184,0.3);
+}
+.btn-lg-blue:hover { background: var(–blue-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,94,184,0.35); }
+.btn-lg-pdf {
+background: var(–red);
+color: white;
+box-shadow: 0 2px 6px rgba(200,16,46,0.25);
+}
+.btn-lg-pdf:hover { background: #A00F24; transform: translateY(-1px); }
+
+/* TOAST */
+.toast {
+position: fixed;
+top: 70px;
+right: 20px;
+background: var(–gray-900);
+color: white;
+padding: 10px 18px;
+border-radius: var(–radius);
+font-size: 13px;
+font-weight: 500;
+z-index: 999;
+transform: translateX(120%);
+transition: transform 0.3s ease;
+display: flex;
+align-items: center;
+gap: 8px;
+box-shadow: var(–shadow-md);
+}
+.toast.show { transform: translateX(0); }
+.toast.success { background: #166534; }
+.toast.error { background: #991B1B; }
+
+/* PRINT */
+@media print {
+.topbar, .action-bar { display: none !important; }
+body { background: white; }
+.container { padding: 0; max-width: 100%; }
+.card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+.col-2, .col-3, .col-4, .two-col-layout { grid-template-columns: 1fr; }
+.indication-grid { grid-template-columns: 1fr; }
+.detect-grid { grid-template-columns: 1fr; }
+.device-table { font-size: 11px; }
+}
+
+/* POLARITY SECTION */
+.polarity-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; }
+.location-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px 8px; }
+
+/* MODE ROW */
+.inline-field { display: flex; align-items: center; gap: 8px; }
+.inline-field label { font-size: 11px; font-weight: 600; color: var(–gray-700); white-space: nowrap; min-width: 60px; }
+.inline-field input, .inline-field select {
+border: 1px solid var(–gray-200);
+border-radius: 4px;
+padding: 5px 8px;
+font-family: inherit;
+font-size: 12px;
+background: var(–gray-50);
+outline: none;
+flex: 1;
+}
+.inline-field input:focus, .inline-field select:focus {
+border-color: var(–blue);
+background: white;
+}
+
+.small-note {
+font-size: 10px;
+color: var(–gray-500);
+font-style: italic;
+margin-top: 8px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="logo-text">Medtronic</div>
+    <div class="form-badge">Device Registration</div>
+  </div>
+  <div class="topbar-right">
+    <div class="autosave-badge" id="autosaveBadge">
+      <div class="autosave-dot"></div>
+      <span id="autosaveText">Draft</span>
+    </div>
+    <button class="btn btn-ghost" onclick="clearForm()">🗑 Clear Form</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+
+<div class="toast" id="toast"></div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+  <!-- HEADER -->
+
+  <div class="form-header">
+    <div class="form-title">Device Registration Form</div>
+    <div class="form-number" id="formNoDisplay">No. <span id="formNoVal">_____</span></div>
+  </div>
+
+  <!-- FORM NO & STAFF -->
+
+  <div class="staff-row">
+    <label>Form No.</label>
+    <input type="text" id="formNo" placeholder="e.g. 43544" style="max-width:120px;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:500;color:var(--red)" oninput="document.getElementById('formNoVal').textContent=this.value||'_____'">
+    <div style="width:1px;height:24px;background:var(--gray-200);margin:0 8px"></div>
+    <label>Medtronic Staff Name</label>
+    <input type="text" id="staffName" placeholder="ชื่อ-นามสกุล" required>
+  </div>
+
+  <!-- ERROR BOX -->
+
+  <div class="error-msg" id="errorBox">
+    <div class="error-msg-title">⚠️ กรุณากรอกข้อมูลที่จำเป็น</div>
+    <ul class="error-list" id="errorList"></ul>
+  </div>
+
+  <!-- SECTION I: GENERAL INFORMATION -->
+
+  <div class="card">
+    <div class="card-header"><span class="section-num">I</span> General Information</div>
+    <div class="card-body">
+      <div class="two-col-layout">
+        <!-- LEFT: General -->
+        <div>
+          <div class="field-grid" style="gap:10px">
+            <div class="field">
+              <label>Implant Date <span class="req">*</span></label>
+              <input type="date" id="implantDate" required>
+            </div>
+            <div class="field">
+              <label>Implant Hospital <span class="req">*</span></label>
+              <input type="text" id="implantHospital" placeholder="ชื่อโรงพยาบาล" required>
+            </div>
+            <div class="field">
+              <label>Implanter <span class="req">*</span></label>
+              <input type="text" id="implanter" placeholder="แพทย์ผู้ทำหัตถการ" required>
+            </div>
+            <div class="field">
+              <label>Referral Hospital</label>
+              <input type="text" id="referralHospital" placeholder="โรงพยาบาลที่ส่งต่อ">
+            </div>
+            <div class="field">
+              <label>Referral Name</label>
+              <input type="text" id="referralName" placeholder="ชื่อผู้ส่งต่อ">
+            </div>
+            <div class="field">
+              <label>MRI Status</label>
+              <select id="mriStatus">
+                <option value="">-- เลือก --</option>
+                <option value="MRI_CONDITIONAL">MRI Conditional</option>
+                <option value="NON_MRI_CONDITIONAL">Non-MRI Conditional</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>MRI Detail</label>
+              <input type="text" id="mriDetail" placeholder="ระบุรายละเอียด (ถ้ามี)">
+            </div>
+          </div>
+        </div>
+
+```
+    <!-- RIGHT: Patient Data -->
+    <div>
+      <div class="subsection-label">Patient Data</div>
+      <div class="field-grid" style="gap:10px">
+        <div class="field">
+          <label>Name (TH) <span class="req">*</span></label>
+          <input type="text" id="nameTH" placeholder="ชื่อ-นามสกุล (ภาษาไทย)" required>
+        </div>
+        <div class="field">
+          <label>Name (EN)</label>
+          <input type="text" id="nameEN" placeholder="Name (English)">
+        </div>
+        <div class="field">
+          <label>HN <span class="req">*</span></label>
+          <input type="text" id="hn" placeholder="Hospital Number" required>
+        </div>
+        <div class="field">
+          <label>Tel.</label>
+          <input type="tel" id="tel" placeholder="0XX-XXX-XXXX">
+        </div>
+        <div class="field">
+          <label>Address</label>
+          <textarea id="address" placeholder="ที่อยู่ผู้ป่วย" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- SECTION II: DEVICE INFORMATION -->
+
+  <div class="card">
+    <div class="card-header"><span class="section-num">II</span> Device Information</div>
+    <div class="card-body">
+
+```
+  <!-- System Type -->
+  <div class="subsection-label">System Type</div>
+  <div class="check-group" style="margin-bottom:14px">
+    <label class="check-item"><input type="checkbox" id="chkNewSystem"><span>New System</span></label>
+    <label class="check-item"><input type="checkbox" id="chkBoxChange"><span>Box Change</span></label>
+    <label class="check-item"><input type="checkbox" id="chkLeadChange"><span>Lead Change</span></label>
+    <label class="check-item"><input type="checkbox" id="chkUpgrade"><span>Upgrade</span></label>
+  </div>
+
+  <!-- Funding -->
+  <div class="subsection-label">Funding / Coverage</div>
+  <div class="check-group" style="margin-bottom:14px">
+    <label class="check-item"><input type="checkbox" id="chkUC"><span>UC</span></label>
+    <label class="check-item"><input type="checkbox" id="chkSSS"><span>SSS</span></label>
+    <label class="check-item"><input type="checkbox" id="chkCSMBS"><span>CSMBS</span></label>
+    <label class="check-item"><input type="checkbox" id="chkSelfPaid"><span>Self-Paid</span></label>
+  </div>
+
+  <!-- Device Table -->
+  <div class="subsection-label">Product & Serial Numbers</div>
+  <table class="device-table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th style="min-width:180px">Model & Serial Number</th>
+        <th style="min-width:120px">Implant Date</th>
+        <th style="min-width:90px">Unit Price (THB)</th>
+        <th style="min-width:80px">Billed / PO</th>
+        <th style="min-width:100px">Remark</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>DEVICE</td>
+        <td><input type="text" id="devModel" placeholder="Model / S/N"></td>
+        <td><div class="date-mini">
+          <input type="text" id="devDD" placeholder="DD" maxlength="2">
+          <span>/</span>
+          <input type="text" id="devMM" placeholder="MM" maxlength="2">
+          <span>/</span>
+          <input type="text" id="devYY" placeholder="YY" maxlength="4">
+        </div></td>
+        <td><input type="number" id="devPrice" placeholder="0.00"></td>
+        <td><input type="text" id="devPO" placeholder="PO#"></td>
+        <td><input type="text" id="devRemark" placeholder=""></td>
+      </tr>
+      <tr>
+        <td>RA LEAD</td>
+        <td><input type="text" id="raModel" placeholder="Model / S/N"></td>
+        <td><div class="date-mini">
+          <input type="text" id="raDD" placeholder="DD" maxlength="2">
+          <span>/</span>
+          <input type="text" id="raMM" placeholder="MM" maxlength="2">
+          <span>/</span>
+          <input type="text" id="raYY" placeholder="YY" maxlength="4">
+        </div></td>
+        <td><input type="number" id="raPrice" placeholder="0.00"></td>
+        <td><input type="text" id="raPO" placeholder="PO#"></td>
+        <td><input type="text" id="raRemark" placeholder=""></td>
+      </tr>
+      <tr>
+        <td>RV LEAD</td>
+        <td><input type="text" id="rvModel" placeholder="Model / S/N"></td>
+        <td><div class="date-mini">
+          <input type="text" id="rvDD" placeholder="DD" maxlength="2">
+          <span>/</span>
+          <input type="text" id="rvMM" placeholder="MM" maxlength="2">
+          <span>/</span>
+          <input type="text" id="rvYY" placeholder="YY" maxlength="4">
+        </div></td>
+        <td><input type="number" id="rvPrice" placeholder="0.00"></td>
+        <td><input type="text" id="rvPO" placeholder="PO#"></td>
+        <td><input type="text" id="rvRemark" placeholder=""></td>
+      </tr>
+      <tr>
+        <td>LV LEAD</td>
+        <td><input type="text" id="lvModel" placeholder="Model / S/N"></td>
+        <td><div class="date-mini">
+          <input type="text" id="lvDD" placeholder="DD" maxlength="2">
+          <span>/</span>
+          <input type="text" id="lvMM" placeholder="MM" maxlength="2">
+          <span>/</span>
+          <input type="text" id="lvYY" placeholder="YY" maxlength="4">
+        </div></td>
+        <td><input type="number" id="lvPrice" placeholder="0.00"></td>
+        <td><input type="text" id="lvPO" placeholder="PO#"></td>
+        <td><input type="text" id="lvRemark" placeholder=""></td>
+      </tr>
+      <tr>
+        <td>OTHER LEAD</td>
+        <td><input type="text" id="otherModel" placeholder="Model / S/N"></td>
+        <td><div class="date-mini">
+          <input type="text" id="otherDD" placeholder="DD" maxlength="2">
+          <span>/</span>
+          <input type="text" id="otherMM" placeholder="MM" maxlength="2">
+          <span>/</span>
+          <input type="text" id="otherYY" placeholder="YY" maxlength="4">
+        </div></td>
+        <td><input type="number" id="otherPrice" placeholder="0.00"></td>
+        <td><input type="text" id="otherPO" placeholder="PO#"></td>
+        <td><input type="text" id="otherRemark" placeholder=""></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TOTAL -->
+  <div class="total-box">
+    <label>Total Device THB</label>
+    <input type="text" id="totalThb" placeholder="คำนวณอัตโนมัติ หรือกรอกเอง" readonly style="cursor:default">
+    <button class="btn btn-ghost" style="font-size:11px;padding:5px 12px" onclick="calcTotal()">คำนวณ</button>
+  </div>
+
+  <!-- ACCESSORIES -->
+  <div class="subsection-label" style="margin-top:14px">Accessories / Case Note</div>
+  <div class="accessories-box">
+    <textarea id="accessories" placeholder="บันทึก accessories หรือ case note เพิ่มเติม..."></textarea>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- SECTION III: LEAD MEASUREMENT -->
+
+  <div class="card">
+    <div class="card-header"><span class="section-num">III</span> Lead Measurement Data</div>
+    <div class="card-body">
+      <table class="lead-table">
+        <thead>
+          <tr>
+            <th style="text-align:left">Chamber</th>
+            <th>Sensing (mV)</th>
+            <th>Threshold</th>
+            <th>Impedance (Ω)</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Atrium</td>
+            <td><input type="text" id="atriumSensing" placeholder="mV"></td>
+            <td><input type="text" id="atriumThreshold" placeholder="V @ ms"></td>
+            <td><input type="text" id="atriumImpedance" placeholder="Ω"></td>
+            <td><input type="text" id="atriumNotes" placeholder=""></td>
+          </tr>
+          <tr>
+            <td>Right Ventricle</td>
+            <td><input type="text" id="rvSensing" placeholder="mV"></td>
+            <td><input type="text" id="rvThreshold" placeholder="V @ ms"></td>
+            <td><input type="text" id="rvImpedance" placeholder="Ω"></td>
+            <td><input type="text" id="rvNotes" placeholder=""></td>
+          </tr>
+          <tr>
+            <td>Left Ventricle</td>
+            <td><input type="text" id="lvSensing" placeholder="mV"></td>
+            <td><input type="text" id="lvThreshold" placeholder="V @ ms"></td>
+            <td><input type="text" id="lvImpedance" placeholder="Ω"></td>
+            <td><input type="text" id="lvNotes" placeholder="@LV___TO___"></td>
+          </tr>
+          <tr>
+            <td>IVSd (cm)</td>
+            <td><input type="text" id="ivsd" placeholder="cm"></td>
+            <td colspan="2"><div style="display:flex;align-items:center;gap:8px;justify-content:center"><span style="font-size:11px;color:var(--gray-500)">LVAT (ms)</span><input type="text" id="lvat" placeholder="ms" style="width:70px"></div></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+```
+  <hr class="divider">
+
+  <!-- Polarity & Location -->
+  <div class="field-grid col-2" style="gap:16px;margin-bottom:12px">
+    <div>
+      <div class="subsection-label">Polarity</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div>
+          <div style="font-size:10px;color:var(--gray-500);margin-bottom:3px">RV</div>
+          <div class="check-group">
+            <label class="check-item"><input type="radio" name="rvPol" value="BIPOLAR"><span>Bipolar</span></label>
+            <label class="check-item"><input type="radio" name="rvPol" value="UNIPOLAR"><span>Unipolar</span></label>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:var(--gray-500);margin-bottom:3px">LV</div>
+          <div class="check-group">
+            <label class="check-item"><input type="radio" name="lvPol" value="BIPOLAR"><span>Bipolar</span></label>
+            <label class="check-item"><input type="radio" name="lvPol" value="UNIPOLAR"><span>Unipolar</span></label>
+            <label class="check-item"><input type="radio" name="lvPol" value="QUADIPOLAR"><span>Quadipolar</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="subsection-label">LV Lead Location</div>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox" id="locHBP"><span>HBP</span></label>
+        <label class="check-item"><input type="checkbox" id="locLBBP"><span>LBBP</span></label>
+        <label class="check-item"><input type="checkbox" id="locAppendage"><span>Appendage</span></label>
+        <label class="check-item"><input type="checkbox" id="locFreeWall"><span>Free Wall</span></label>
+        <label class="check-item"><input type="checkbox" id="locSeptum"><span>Septum</span></label>
+        <label class="check-item"><input type="checkbox" id="locApex"><span>Apex</span></label>
+        <label class="check-item"><input type="checkbox" id="locRVOT"><span>RVOT</span></label>
+      </div>
+      <div class="field" style="margin-top:8px">
+        <label>CS Branch</label>
+        <input type="text" id="csBranch" placeholder="ระบุ branch">
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Parameter Settings -->
+  <div class="subsection-label">Parameter Settings</div>
+  <div class="field-grid col-2" style="gap:12px">
+    <div class="field">
+      <label>Mode</label>
+      <select id="paceMode">
+        <option value="">-- เลือก Mode --</option>
+        <option>DDD</option><option>DDDR</option><option>VVI</option><option>VVIR</option>
+        <option>AAI</option><option>AAIR</option><option>DOO</option><option>VOO</option>
+        <option>OAO</option><option>OVO</option><option>ODO</option>
+        <option>CRT-D DDD</option><option>CRT-P DDD</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Base Rate (BPM)</label>
+      <input type="number" id="baseRate" placeholder="e.g. 60">
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <!-- SECTION IV: INDICATION -->
+
+  <div class="card">
+    <div class="card-header"><span class="section-num">IV</span> Indication</div>
+    <div class="card-body">
+      <div class="indication-grid">
+
+```
+    <!-- PACING -->
+    <div class="ind-box">
+      <div class="ind-box-header">Pacing Indications</div>
+      <div class="ind-box-body">
+        <div class="field">
+          <label>SSS</label>
+          <input type="text" id="sss" placeholder="ระบุ (ถ้ามี)">
+        </div>
+        <div class="field">
+          <label>AV Block</label>
+          <input type="text" id="avBlock" placeholder="ระบุ degree">
+        </div>
+        <div class="field">
+          <label>Others</label>
+          <input type="text" id="pacingOther" placeholder="ระบุ">
+        </div>
+        <div class="field">
+          <label>AF Paroxysmal / Persistent / Permanent</label>
+          <select id="afStatus">
+            <option value="">-- ไม่มี --</option>
+            <option value="PAROXYSMAL">Paroxysmal</option>
+            <option value="PERSISTENT">Persistent</option>
+            <option value="PERMANENT">Permanent</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICD -->
+    <div class="ind-box">
+      <div class="ind-box-header">ICD Indications</div>
+      <div class="ind-box-body">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label class="check-item"><input type="checkbox" id="icdPrimary"><span>Primary Prevention</span></label>
+          <label class="check-item"><input type="checkbox" id="icdSecondary"><span>Secondary Prevention</span></label>
+        </div>
+        <div class="field">
+          <label>VY/VF Rate (BPM)</label>
+          <input type="number" id="vtvfRate" placeholder="BPM">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <label class="check-item"><input type="checkbox" id="icdPostMI"><span>Post MI</span></label>
+          <label class="check-item"><input type="checkbox" id="icdNonMI"><span>Non MI</span></label>
+        </div>
+        <div class="field-grid col-2" style="gap:8px">
+          <div class="field">
+            <label>LVEF (%)</label>
+            <input type="number" id="icdLvef" placeholder="%">
+          </div>
+          <div class="field">
+            <label>NYHA Class</label>
+            <select id="icdNyha">
+              <option value="">--</option>
+              <option>I</option><option>II</option><option>III</option><option>IV</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Genetics / Channelopathy</label>
+          <select id="icdGenetics">
+            <option value="">-- ไม่มี --</option>
+            <option value="HCM">HCM</option>
+            <option value="HoCM">HoCM</option>
+            <option value="DCM">DCM</option>
+            <option value="ARVD">ARVD</option>
+            <option value="LQTS">LQTS</option>
+            <option value="BRUGADA">Brugada</option>
+          </select>
+        </div>
+        <label class="check-item"><input type="checkbox" id="icdSyncope"><span>Unexplained Syncope with Inducible VT/VF</span></label>
+      </div>
+    </div>
+
+    <!-- CRT + DETECTION -->
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="ind-box">
+        <div class="ind-box-header">CRT Indications</div>
+        <div class="ind-box-body">
+          <label class="check-item"><input type="checkbox" id="crtHF"><span>Heart Failure</span></label>
+          <div class="field">
+            <label>NYHA Class</label>
+            <select id="crtNyha">
+              <option value="">--</option>
+              <option>I</option><option>II</option><option>III</option><option>IV</option>
+            </select>
+          </div>
+          <label class="check-item"><input type="checkbox" id="crtLowEF"><span>Low LVEF (EF &lt;35%)</span></label>
+          <div class="field-grid col-2" style="gap:8px">
+            <div class="field">
+              <label>LVEF (%)</label>
+              <input type="number" id="crtLvef" placeholder="%">
+            </div>
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="crtLvefDate">
+            </div>
+          </div>
+          <label class="check-item"><input type="checkbox" id="crtWideQRS"><span>Wide QRS (&gt;120 ms)</span></label>
+          <div class="field-grid col-2" style="gap:8px">
+            <div class="field">
+              <label>QRS Duration (ms)</label>
+              <input type="number" id="qrsDuration" placeholder="ms">
+            </div>
+            <div class="field">
+              <label>Date</label>
+              <input type="date" id="qrsDate">
+            </div>
+          </div>
+          <label class="check-item"><input type="checkbox" id="crtVPDep"><span>VP Dependent</span></label>
+        </div>
+      </div>
+
+      <div class="ind-box">
+        <div class="ind-box-header">Detection & Therapy</div>
+        <div class="ind-box-body">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div class="detect-row">
+              <label>VF Zone</label>
+              <input type="number" id="vfBPM" placeholder="BPM">
+              <span>BPM</span>
+              <span style="font-size:11px;color:var(--gray-500)">Rx:</span>
+              <input type="text" id="vfRx" placeholder="" style="width:60px">
+            </div>
+            <div class="detect-row">
+              <label>FVT Zone</label>
+              <input type="number" id="fvtBPM" placeholder="BPM">
+              <span>BPM</span>
+              <span style="font-size:11px;color:var(--gray-500)">Rx:</span>
+              <input type="text" id="fvtRx" placeholder="" style="width:60px">
+            </div>
+            <div class="detect-row">
+              <label>VT Zone</label>
+              <input type="number" id="vtBPM" placeholder="BPM">
+              <span>BPM</span>
+              <span style="font-size:11px;color:var(--gray-500)">Rx:</span>
+              <input type="text" id="vtRx" placeholder="" style="width:60px">
+            </div>
+            <div class="detect-row">
+              <label>VT Monitor</label>
+              <input type="number" id="vtMonBPM" placeholder="BPM">
+              <span>BPM</span>
+            </div>
+            <div class="field" style="margin-top:4px">
+              <label>Others</label>
+              <input type="text" id="detectOthers" placeholder="ระบุ">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <p class="small-note">* REMARK: WHITE (Company), BLUE (CS), GREEN (Hospital), PINK (Sale Rep.)</p>
+</div>
+```
+
+  </div>
+
+</div><!-- /container -->
+
+<!-- ACTION BAR -->
+
+<div class="action-bar">
+  <div class="action-bar-left">
+    <button class="btn-lg btn-lg-outline" onclick="loadDraft()">📂 Load Draft</button>
+    <button class="btn-lg btn-lg-outline" onclick="saveDraft()">💾 Save Draft</button>
+  </div>
+  <div class="action-bar-right">
+    <button class="btn-lg btn-lg-pdf" onclick="exportPDF()">📄 Export PDF</button>
+    <button class="btn-lg btn-lg-blue" onclick="submitForm()">✅ Submit</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// AUTO-SAVE
+// ═══════════════════════════════════════════════
+let autoSaveTimer;
+const STORAGE_KEY = 'medtronic_dev_reg_draft';
+
+function getAllFields() {
+  const inputs = document.querySelectorAll('input, select, textarea');
+  const data = {};
+  inputs.forEach(el => {
+    if (el.id) {
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        data[el.id] = el.checked;
+      } else {
+        data[el.id] = el.value;
+      }
+    }
+  });
+  // Named radios
+  ['rvPol','lvPol'].forEach(name => {
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    data[`radio_${name}`] = checked ? checked.value : '';
+  });
+  return data;
+}
+
+function setAllFields(data) {
+  Object.entries(data).forEach(([id, val]) => {
+    if (id.startsWith('radio_')) {
+      const name = id.replace('radio_', '');
+      const radio = document.querySelector(`input[name="${name}"][value="${val}"]`);
+      if (radio) radio.checked = true;
+      return;
+    }
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.type === 'checkbox' || el.type === 'radio') {
+      el.checked = !!val;
+    } else {
+      el.value = val;
+    }
+  });
+  // Update form number display
+  const fn = document.getElementById('formNo');
+  if (fn) document.getElementById('formNoVal').textContent = fn.value || '_____';
+}
+
+function triggerAutoSave() {
+  clearTimeout(autoSaveTimer);
+  const badge = document.getElementById('autosaveBadge');
+  const text = document.getElementById('autosaveText');
+  badge.classList.remove('saved');
+  text.textContent = 'Saving...';
+  autoSaveTimer = setTimeout(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(getAllFields()));
+    badge.classList.add('saved');
+    text.textContent = 'Auto-saved';
+    setTimeout(() => {
+      badge.classList.remove('saved');
+      text.textContent = 'Draft';
+    }, 3000);
+  }, 800);
+}
+
+// Attach auto-save listeners
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', triggerAutoSave);
+  el.addEventListener('change', triggerAutoSave);
+});
+
+// ═══════════════════════════════════════════════
+// SAVE / LOAD DRAFT
+// ═══════════════════════════════════════════════
+function saveDraft() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(getAllFields()));
+  showToast('💾 Draft saved successfully', 'success');
+}
+
+function loadDraft() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) { showToast('No draft found', 'error'); return; }
+  try {
+    setAllFields(JSON.parse(raw));
+    showToast('📂 Draft loaded', 'success');
+  } catch(e) {
+    showToast('Error loading draft', 'error');
+  }
+}
+
+// Load on start
+window.addEventListener('load', () => {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw) {
+    try { setAllFields(JSON.parse(raw)); } catch(e) {}
+  }
+});
+
+// ═══════════════════════════════════════════════
+// CLEAR FORM
+// ═══════════════════════════════════════════════
+function clearForm() {
+  if (!confirm('ล้างข้อมูลทั้งหมด? (Draft จะถูกลบด้วย)')) return;
+  document.querySelectorAll('input, select, textarea').forEach(el => {
+    if (el.type === 'checkbox' || el.type === 'radio') el.checked = false;
+    else el.value = '';
+  });
+  document.getElementById('formNoVal').textContent = '_____';
+  localStorage.removeItem(STORAGE_KEY);
+  showToast('🗑 Form cleared', 'success');
+}
+
+// ═══════════════════════════════════════════════
+// CALC TOTAL
+// ═══════════════════════════════════════════════
+function calcTotal() {
+  const priceIds = ['devPrice','raPrice','rvPrice','lvPrice','otherPrice'];
+  let total = 0;
+  priceIds.forEach(id => {
+    const v = parseFloat(document.getElementById(id).value) || 0;
+    total += v;
+  });
+  document.getElementById('totalThb').value = total.toLocaleString('th-TH', {minimumFractionDigits:2});
+}
+
+// ═══════════════════════════════════════════════
+// VALIDATION
+// ═══════════════════════════════════════════════
+const REQUIRED = [
+  { id: 'staffName', label: 'Medtronic Staff Name' },
+  { id: 'implantDate', label: 'Implant Date' },
+  { id: 'implantHospital', label: 'Implant Hospital' },
+  { id: 'implanter', label: 'Implanter' },
+  { id: 'nameTH', label: 'Patient Name (TH)' },
+  { id: 'hn', label: 'HN' },
+];
+
+function validate() {
+  const errors = [];
+  document.querySelectorAll('input.invalid, select.invalid, textarea.invalid').forEach(el => {
+    el.classList.remove('invalid');
+  });
+
+  REQUIRED.forEach(({id, label}) => {
+    const el = document.getElementById(id);
+    if (!el || !el.value.trim()) {
+      errors.push(label);
+      if (el) el.classList.add('invalid');
+    }
+  });
+
+  const errorBox = document.getElementById('errorBox');
+  const errorList = document.getElementById('errorList');
+  if (errors.length > 0) {
+    errorList.innerHTML = errors.map(e => `<li>${e}</li>`).join('');
+    errorBox.classList.add('visible');
+    errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return false;
+  } else {
+    errorBox.classList.remove('visible');
+    return true;
+  }
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT
+// ═══════════════════════════════════════════════
+function submitForm() {
+  if (!validate()) return;
+  const data = getAllFields();
+  console.log('Form submitted:', data);
+  showToast('✅ Form submitted successfully!', 'success');
+  // In real integration: POST data to backend API here
+}
+
+// ═══════════════════════════════════════════════
+// EXPORT PDF (print)
+// ═══════════════════════════════════════════════
+function exportPDF() {
+  window.print();
+}
+
+// ═══════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════
+let toastTimer;
+function showToast(msg, type = '') {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.className = `toast ${type} show`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
